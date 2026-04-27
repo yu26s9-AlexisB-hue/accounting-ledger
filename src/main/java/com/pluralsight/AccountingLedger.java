@@ -15,7 +15,7 @@ public class AccountingLedger {
     public static void main(String[] args){
 
         try{
-            FileWriter writer = new FileWriter("transactions.csv");
+            FileWriter writer = new FileWriter("transactions.csv", true);
             Scanner scanner = new Scanner(System.in);
             String command;
             do{
@@ -27,15 +27,21 @@ public class AccountingLedger {
 
                 switch (command.toLowerCase()){
                     case "d":
-                        System.out.println("make a deposit");
+                        String deposit = FormatTheDeposit() + "\n";
+                        writer.write(deposit);
                         break;
                     case "p":
-                        System.out.println("make a payment");
+                        String payment = FormatMakingPayment() + "\n";
+                        writer.write(payment);
                         break;
+                    case "x":
+                        System.out.println("Hope to see you next time!");
                 }
 
 
             }while (!command.equalsIgnoreCase("x"));
+        writer.close();
+
 
 
         }catch (IOException e) {
@@ -74,7 +80,7 @@ public class AccountingLedger {
 
     private static String FormatTheDeposit(){
         LocalDateTime today = LocalDateTime.now();
-        DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
 
         Scanner scanner = new Scanner(System.in);
@@ -87,14 +93,15 @@ public class AccountingLedger {
 
         System.out.println("How much would you like to deposit: ");
         double deposit = scanner.nextDouble();
+        scanner.nextLine();
 
 
-        return FormatedTime + " "+ description +" "+ name +" "+ deposit;
+        return FormatedTime + "|"+ description +"|"+ name +"|"+ deposit;
     }
 
     private static String FormatMakingPayment(){
         LocalDateTime today = LocalDateTime.now();
-        DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
 
         Scanner scanner = new Scanner(System.in);
@@ -107,11 +114,12 @@ public class AccountingLedger {
 
         System.out.println("How much would you like to deposit: ");
         double deposit = scanner.nextDouble();
+        scanner.nextLine();
 
 
         double payment = deposit * -1;
 
-        return FormatedTime + " " + description +" "+ name +" "+ payment;
+        return FormatedTime + "|" + description +"|"+ name +"|"+ payment;
     }
 
 }
