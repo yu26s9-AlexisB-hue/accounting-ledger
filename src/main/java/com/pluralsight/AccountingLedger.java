@@ -17,26 +17,25 @@ public class AccountingLedger {
         try{
             FileWriter writer = new FileWriter("transactions.csv");
             Scanner scanner = new Scanner(System.in);
-             String command;
-            command = scanner.nextLine();
-
+            String command;
             do{
                 System.out.println("--The Store Home Screen--");
                 System.out.println("Add a deposit( Press D): ");
                 System.out.println("Make a payment(Press P): ");
                 System.out.println("Exit (Press X)");
+                command = scanner.nextLine();
 
-
-                switch(command.toLowerCase()){
+                switch (command.toLowerCase()){
                     case "d":
-                        System.out.println("deposit");
+                        System.out.println("make a deposit");
                         break;
-                    case"p":
+                    case "p":
                         System.out.println("make a payment");
                         break;
-
                 }
-            }while (command.equalsIgnoreCase("x"));
+
+
+            }while (!command.equalsIgnoreCase("x"));
 
 
         }catch (IOException e) {
