@@ -1,7 +1,6 @@
 package com.pluralsight;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 public class Details {
     private String date;
@@ -16,6 +15,16 @@ public class Details {
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
+    }
+
+    //Splits apart each line of and makes sense of the information
+    public Details(String line){
+        String[] parts = line.split(Pattern.quote("|"));
+        this.date = parts[0];
+        this.time = parts[1];
+        this.description = parts[2];
+        this.vendor = parts[3];
+        this.amount = Double.parseDouble(parts[4]);
     }
 
     public String getDate() {
