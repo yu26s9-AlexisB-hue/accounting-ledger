@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -56,6 +57,7 @@ public class AccountingLedger {
     private static ArrayList<Details> Ledger(){
         ArrayList<Details> result = new ArrayList<>();
         try {
+            Scanner scanner = new Scanner(System.in);
             BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"));
 
             String line;
@@ -64,20 +66,31 @@ public class AccountingLedger {
                 Details d = new Details(line);
                 result.add(d);
 
-                //System.out.println("date|time|description|vendor|amount");
-
-                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-
-//                if (Ledger().isEmpty()) {
-//                    System.out.println("No current entries");
-//                } else {
-//                    System.out.println("date|time|description|vendor|amount");
-//
+                //trying to reverse my list. currently having issues
+//                Collections.reverse(result);
+//                for (String item : result){
 //                    System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-//
 //                }
+//                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+
             }
             reader.close();
+            //Reversing the way my code displays
+            Collections.reverse(result);
+            for (Details d : result){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+                String command;
+
+                do{
+                    System.out.println();
+                    System.out.println();
+                    System.out.println();
+                    System.out.println();
+
+                }while(!command.equalsIgnoreCase("x"));
+            }
+
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -128,5 +141,7 @@ public class AccountingLedger {
 
         return FormatedTime + "|" + description +"|"+ name +"|"+ payment + "\n";
     }
+
+
 
 }
