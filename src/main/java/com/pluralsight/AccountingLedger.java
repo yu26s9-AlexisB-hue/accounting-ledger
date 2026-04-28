@@ -15,7 +15,7 @@ public class AccountingLedger {
     public static void main(String[] args){
 
         try{
-            FileWriter writer = new FileWriter("transactions.csv", true);
+            //FileWriter writer = new FileWriter("transactions.csv", true);
             Scanner scanner = new Scanner(System.in);
             String command;
             do{
@@ -29,17 +29,18 @@ public class AccountingLedger {
                 switch (command.toLowerCase()){
                     case "d":
                         String deposit = FormatTheDeposit(scanner);
-                        writer.write(deposit);
+                        //writer.write(deposit);
+                        transactionFileWriter(deposit);
                         break;
 
                     case "p":
                         String payment = FormatMakingPayment(scanner);
-                        writer.write(payment);
+                        //writer.write(payment);
                         break;
 
                     case "l":
                         ArrayList<Details> result = transactionFileReader();
-                        DisplayLedger(result, scanner);
+                        DisplayLedgerScreen(result, scanner);
                         break;
 
                     case "x":
@@ -48,11 +49,11 @@ public class AccountingLedger {
 
             }while (!command.equalsIgnoreCase("x"));
             System.out.println("Hope to see you next time!");
-        writer.close();
+        //writer.close();
 
 
 
-        }catch (IOException e) {
+        }catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -121,7 +122,7 @@ public class AccountingLedger {
         return FormatedTime + "|" + description +"|"+ name +"|"+ payment + "\n";
     }
 
-    private static void DisplayLedger(ArrayList<Details> result, Scanner scanner){
+    private static void DisplayLedgerScreen(ArrayList<Details> result, Scanner scanner){
         String command;
         do{
 
@@ -218,6 +219,14 @@ public class AccountingLedger {
         }
     }
 
+    private static void transactionFileWriter(String input){
+        try{
+            FileWriter writer = new FileWriter("transactions.csv", true);
+            writer.write(input);
 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
