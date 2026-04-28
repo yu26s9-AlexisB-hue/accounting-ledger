@@ -145,6 +145,7 @@ public class AccountingLedger {
 
             switch(command.toLowerCase()){
                 case "a":
+                    //Display every entry from the transaction.csv file
                     for(int i = 0; i < result.size(); i++) {
                         Details d = result.get(i);
                         System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
@@ -155,6 +156,11 @@ public class AccountingLedger {
                     System.out.println("deposit");
                     for(int i = 0; i < result.size(); i++){
                         Details d = result.get(i);
+                        
+                        //checks if the amount is positive. If it is positive then the amount is a deposit
+                        if (d.getAmount() > 0){
+                            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+                        }
                     }
                     break;
                 case "p":
