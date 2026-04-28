@@ -37,7 +37,8 @@ public class AccountingLedger {
                         writer.write(payment);
                         break;
                     case "l":
-                        Ledger();
+                        String result = Ledger();
+                        DisplayLedger(result);
                     case "x":
                 }
 
@@ -77,20 +78,6 @@ public class AccountingLedger {
             reader.close();
             //Reversing the way my code displays
             Collections.reverse(result);
-            for (Details d : result){
-                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-                String command;
-
-                do{
-                    System.out.println();
-                    System.out.println();
-                    System.out.println();
-                    System.out.println();
-
-                }while(!command.equalsIgnoreCase("x"));
-            }
-
-
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -140,6 +127,35 @@ public class AccountingLedger {
         double payment = deposit * -1;
 
         return FormatedTime + "|" + description +"|"+ name +"|"+ payment + "\n";
+    }
+
+    private static void DisplayLedger(String[] result){
+        String command;
+        do{
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Display all entries(Press A): ");
+            System.out.println("Display only deposit entries(Press D): ");
+            System.out.println("Display only payment entries(Press P): ");
+            System.out.println("Custom search(Press R): ");
+            command = scanner.nextLine();
+
+            switch(command.toLowerCase()){
+                case "a":
+                    System.out.println("all transactions");
+                    break;
+                case "d":
+                    System.out.println("deposit");
+                case "p":
+                    System.out.println("payments");
+                    break;
+                case "r":
+                    System.out.println("custom search");
+                    break;
+            }
+
+        }while(!command.equalsIgnoreCase("h"));
+        System.out.println("--Back to the Home Screen--");
     }
 
 
