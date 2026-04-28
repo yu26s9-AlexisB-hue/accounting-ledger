@@ -39,7 +39,7 @@ public class AccountingLedger {
                         break;
 
                     case "l":
-                        ArrayList<Details> result = Ledger();
+                        ArrayList<Details> result = transactionFileReader();
                         DisplayLedger(result);
                     case "x":
                 }
@@ -57,7 +57,7 @@ public class AccountingLedger {
 
     }
 
-    private static ArrayList<Details> Ledger(){
+    private static ArrayList<Details> transactionFileReader(){
         ArrayList<Details> result = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(System.in);
@@ -152,20 +152,31 @@ public class AccountingLedger {
                     }
                     //System.out.println("all transactions");
                     break;
+
                 case "d":
                     System.out.println("deposit");
                     for(int i = 0; i < result.size(); i++){
                         Details d = result.get(i);
-                        
+
                         //checks if the amount is positive. If it is positive then the amount is a deposit
                         if (d.getAmount() > 0){
                             System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
                         }
                     }
                     break;
+
                 case "p":
                     System.out.println("payments");
+                    for(int i = 0; i < result.size(); i++){
+                        Details d = result.get(i);
+
+                        //Checks if the amount is negative. If amount is negative then it is a payment
+                        if (d.getAmount() < 0){
+                            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+                        }
+                    }
                     break;
+
                 case "r":
                     System.out.println("custom search");
                     break;
