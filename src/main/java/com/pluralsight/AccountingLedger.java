@@ -28,18 +28,18 @@ public class AccountingLedger {
 
                 switch (command.toLowerCase()){
                     case "d":
-                        String deposit = FormatTheDeposit();
+                        String deposit = FormatTheDeposit(scanner);
                         writer.write(deposit);
                         break;
 
                     case "p":
-                        String payment = FormatMakingPayment();
+                        String payment = FormatMakingPayment(scanner);
                         writer.write(payment);
                         break;
 
                     case "l":
                         ArrayList<Details> result = transactionFileReader();
-                        DisplayLedger(result);
+                        DisplayLedger(result, scanner);
                         break;
 
                     case "x":
@@ -61,7 +61,6 @@ public class AccountingLedger {
     private static ArrayList<Details> transactionFileReader(){
         ArrayList<Details> result = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(System.in);
             BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"));
 
             String line;
@@ -69,14 +68,6 @@ public class AccountingLedger {
             while ((line = reader.readLine()) != null) {
                 Details d = new Details(line);
                 result.add(d);
-
-                //trying to reverse my list. currently having issues
-//                Collections.reverse(result);
-//                for (String item : result){
-//                    System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-//                }
-//                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-
             }
             reader.close();
             //Reversing the way my code displays
@@ -88,12 +79,11 @@ public class AccountingLedger {
         return result;
     }
 
-    private static String FormatTheDeposit(){
+    private static String FormatTheDeposit(Scanner scanner){
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
 
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the vendor/payee's name?: ");
         String name = scanner.nextLine();
@@ -109,12 +99,11 @@ public class AccountingLedger {
         return FormatedTime + "|"+ description +"|"+ name +"|"+ deposit + "\n";
     }
 
-    private static String FormatMakingPayment(){
+    private static String FormatMakingPayment(Scanner scanner){
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
 
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the vendor/payee's name?: ");
         String name = scanner.nextLine();
@@ -132,10 +121,9 @@ public class AccountingLedger {
         return FormatedTime + "|" + description +"|"+ name +"|"+ payment + "\n";
     }
 
-    private static void DisplayLedger(ArrayList<Details> result){
+    private static void DisplayLedger(ArrayList<Details> result, Scanner scanner){
         String command;
         do{
-            Scanner scanner = new Scanner(System.in);
 
 
             System.out.println("--Ledger Screen --");
@@ -182,7 +170,7 @@ public class AccountingLedger {
 
                 case "r":
                     System.out.println();
-                    DisplayReportsScreen(result);
+                    DisplayReportsScreen(result, scanner);
                     break;
             }
 
@@ -190,13 +178,13 @@ public class AccountingLedger {
         System.out.println("--Back to the Home Screen--");
     }
 
-    private static void DisplayReportsScreen(ArrayList<Details> result){
+    private static void DisplayReportsScreen(ArrayList<Details> result, Scanner scanner){
         boolean running = true;
 
         int command;
 
         while (running){
-            Scanner scanner = new Scanner(System.in);
+
             System.out.println("--Reports Screen--");
             System.out.println("Month to Date(Press 1): ");
             System.out.println("Previous Month(Press 2): ");
