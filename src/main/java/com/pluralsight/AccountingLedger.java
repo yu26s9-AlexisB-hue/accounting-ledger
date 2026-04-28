@@ -223,6 +223,7 @@ public class AccountingLedger {
         try{
             FileWriter writer = new FileWriter("transactions.csv", true);
             writer.write(input);
+            writer.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
