@@ -32,12 +32,14 @@ public class AccountingLedger {
                         String deposit = FormatTheDeposit();
                         writer.write(deposit);
                         break;
+
                     case "p":
                         String payment = FormatMakingPayment();
                         writer.write(payment);
                         break;
+
                     case "l":
-                        String result = Ledger();
+                        ArrayList<Details> result = Ledger();
                         DisplayLedger(result);
                     case "x":
                 }
@@ -129,7 +131,7 @@ public class AccountingLedger {
         return FormatedTime + "|" + description +"|"+ name +"|"+ payment + "\n";
     }
 
-    private static void DisplayLedger(String[] result){
+    private static void DisplayLedger(ArrayList<Details> result){
         String command;
         do{
             Scanner scanner = new Scanner(System.in);
@@ -138,14 +140,23 @@ public class AccountingLedger {
             System.out.println("Display only deposit entries(Press D): ");
             System.out.println("Display only payment entries(Press P): ");
             System.out.println("Custom search(Press R): ");
+            System.out.println("Return to Home Screen(Press H): ");
             command = scanner.nextLine();
 
             switch(command.toLowerCase()){
                 case "a":
-                    System.out.println("all transactions");
+                    for(int i = 0; i < result.size(); i++) {
+                        Details d = result.get(i);
+                        System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+                    }
+                    //System.out.println("all transactions");
                     break;
                 case "d":
                     System.out.println("deposit");
+                    for(int i = 0; i < result.size(); i++){
+                        Details d = result.get(i);
+                    }
+                    break;
                 case "p":
                     System.out.println("payments");
                     break;
