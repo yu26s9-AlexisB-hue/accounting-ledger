@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,6 +40,8 @@ public class AccountingLedger {
                     case "l":
                         ArrayList<Details> result = transactionFileReader();
                         DisplayLedger(result);
+                        break;
+
                     case "x":
                 }
 
@@ -136,6 +137,8 @@ public class AccountingLedger {
         do{
             Scanner scanner = new Scanner(System.in);
 
+
+            System.out.println("--Ledger Screen --");
             System.out.println("Display all entries(Press A): ");
             System.out.println("Display only deposit entries(Press D): ");
             System.out.println("Display only payment entries(Press P): ");
@@ -178,12 +181,53 @@ public class AccountingLedger {
                     break;
 
                 case "r":
-                    System.out.println("custom search");
+                    System.out.println();
+                    DisplayReportsScreen(result);
                     break;
             }
 
         }while(!command.equalsIgnoreCase("h"));
         System.out.println("--Back to the Home Screen--");
+    }
+
+    private static void DisplayReportsScreen(ArrayList<Details> result){
+        boolean running = true;
+
+        int command;
+
+        while (running){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("--Reports Screen--");
+            System.out.println("Month to Date(Press 1): ");
+            System.out.println("Previous Month(Press 2): ");
+            System.out.println("Year to Date(Press 3): ");
+            System.out.println("Previous Year(Press 4): ");
+            System.out.println("Search by vendor(Press 5): ");
+            System.out.println("Go back to Ledger Screen(Press 0): ");
+            command = scanner.nextInt();
+
+            switch(command){
+                case 1:
+                    System.out.println("Month to Date");
+                    break;
+                case 2:
+                    System.out.println("Previous Month");
+                    break;
+                case 3:
+                    System.out.println("Year to Date");
+                    break;
+                case 4:
+                    System.out.println("Previous Year");
+                    break;
+                case 5:
+                    System.out.println("Search by vendor");
+                    break;
+                case 0:
+                    running = false;
+                    break;
+            }
+
+        }
     }
 
 
