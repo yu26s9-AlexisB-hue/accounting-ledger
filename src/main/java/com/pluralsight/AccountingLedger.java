@@ -3,7 +3,6 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class AccountingLedger {
     public static void main(String[] args){
 
         try{
-            //FileWriter writer = new FileWriter("transactions.csv", true);
             Scanner scanner = new Scanner(System.in);
             String command;
             do{
@@ -29,13 +27,13 @@ public class AccountingLedger {
                 switch (command.toLowerCase()){
                     case "d":
                         String deposit = FormatTheDeposit(scanner);
-                        //writer.write(deposit);
                         transactionFileWriter(deposit);
                         break;
 
                     case "p":
                         String payment = FormatMakingPayment(scanner);
-                        //writer.write(payment);
+                        transactionFileWriter(payment);
+
                         break;
 
                     case "l":
@@ -49,7 +47,6 @@ public class AccountingLedger {
 
             }while (!command.equalsIgnoreCase("x"));
             System.out.println("Hope to see you next time!");
-        //writer.close();
 
 
 
@@ -80,7 +77,7 @@ public class AccountingLedger {
         return result;
     }
 
-    private static String FormatTheDeposit(Scanner scanner){
+    private static String FormatTheDeposit(Scanner scanner) {
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
@@ -92,12 +89,28 @@ public class AccountingLedger {
         System.out.println("description of transaction: ");
         String description = scanner.nextLine();
 
-        System.out.println("How much would you like to deposit: ");
-        double deposit = scanner.nextDouble();
-        scanner.nextLine();
+        //Making sure the user always enters a positive number and doesn't crash when entering a letter
+        double deposit;
+        while (true) {
+            System.out.println("How much would you like to deposit: ");
+            if (scanner.hasNextDouble()) {
+                deposit = scanner.nextDouble();
+                scanner.nextLine();
+
+                if (deposit > 0) {
+                    break;
+                } else
+                    System.out.println("Please enter a number greater than zero.");
+            } else {
+                System.out.println("Invalid entry");
+                scanner.nextLine();
 
 
-        return FormatedTime + "|"+ description +"|"+ name +"|"+ deposit + "\n";
+            }
+        }
+
+        return FormatedTime + "|" + description + "|" + name + "|" + deposit + "\n";
+
     }
 
     private static String FormatMakingPayment(Scanner scanner){
@@ -112,10 +125,23 @@ public class AccountingLedger {
         System.out.println("description of transaction: ");
         String description = scanner.nextLine();
 
-        System.out.println("How much would you like to deposit: ");
-        double deposit = scanner.nextDouble();
-        scanner.nextLine();
+        //Making sure the user always enters a positive number and doesn't crash when entering a letter
+        double deposit;
+        while (true) {
+            System.out.println("How much would you like to Pay: ");
+            if (scanner.hasNextDouble()) {
+                deposit = scanner.nextDouble();
+                scanner.nextLine();
 
+                if (deposit > 0) {
+                    break;
+                } else
+                    System.out.println("Please enter a number greater than zero.");
+            } else {
+                System.out.println("Invalid entry");
+                scanner.nextLine();
+            }
+        }
 
         double payment = deposit * -1;
 
