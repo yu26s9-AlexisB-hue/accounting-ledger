@@ -224,7 +224,7 @@ public class AccountingLedger {
                     break;
 
                 case "2":
-                    searchByPreviousMonth();
+                    searchByPreviousMonth(result);
                     break;
 
                 case "3":
@@ -251,20 +251,34 @@ public class AccountingLedger {
     private static void searchByMonthToDate(ArrayList<Details> result){
         System.out.println("Month To Date");
         LocalDate today = LocalDate.now();
-        LocalDate firstOfMonth = today.withDayOfMonth(30);
+        LocalDate firstOfMonth = today.withDayOfMonth(1);
 
         for(int i = 0; i < result.size(); i++){
             Details d = result.get(i);
             LocalDate date = d.getDate();
 
-            if (date.isBefore(firstOfMonth) && date.isAfter(today)){
+            if (!date.isBefore(firstOfMonth) && !date.isAfter(today)){
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }else{
+                System.out.println("No transactions for this month.");
             }
         }
     }
 
-    private static void searchByPreviousMonth(){
+    private static void searchByPreviousMonth(ArrayList<Details> result){
         System.out.println("Previous Month");
+        LocalDate today = LocalDate.now();
+        LocalDate currentMonth = today.withDayOfMonth(1);
+
+        for(int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+            LocalDate date = d.getDate();
+
+            if (date.isBefore(currentMonth)){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+
+        }
     }
 
     private static void searchByYearToDate(){
