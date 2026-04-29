@@ -231,7 +231,7 @@ public class AccountingLedger {
                     break;
 
                 case "4":
-                    searchByPreviousYear();
+                    searchByPreviousYear(result);
                     break;
 
                 case "5":
@@ -302,9 +302,23 @@ public class AccountingLedger {
         }
     }
 
-    private static void searchByPreviousYear() {
+    private static void searchByPreviousYear(ArrayList<Details> result) {
         System.out.println("Previous Year");
-        
+        LocalDate today = LocalDate.now();
+        LocalDate currentYear = today.withDayOfYear(1);
+        LocalDate lastYear = currentYear.minusMonths(1);
+        LocalDate firstDayLastYear = lastYear.withDayOfYear(1);
+
+        for(int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+            LocalDate date = d.getDate();
+
+            if (!date.isBefore(firstDayLastYear) && !date.isAfter(lastYear)){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+        }
+
+
     }
 
     private static void searchByVendor(ArrayList<Details> result, Scanner scanner) {
