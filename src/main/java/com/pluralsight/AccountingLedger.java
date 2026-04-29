@@ -176,41 +176,18 @@ public class AccountingLedger {
             switch(command.toLowerCase()){
                 case "a":
                     ChecksIfTransactionsIsEmpty(result);
-
-                    System.out.println("All Transaction");
-                    //Display every entry from the transaction.csv file
-                    for(int i = 0; i < result.size(); i++) {
-                        Details d = result.get(i);
-                        System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-                    }
+                    AllTransactions(result);
                     break;
 
                 case "d":
                     ChecksIfTransactionsIsEmpty(result);
-
-                    System.out.println("Deposit");
-                    for(int i = 0; i < result.size(); i++){
-                        Details d = result.get(i);
-
-                        //checks if the amount is positive. If it is positive then the amount is a deposit
-                        if (d.getAmount() > 0){
-                            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-                        }
-                    }
+                    ShowDeposits(result);
                     break;
 
                 case "p":
                     ChecksIfTransactionsIsEmpty(result);
+                    ShowPayments(result);
 
-                    System.out.println("Payments");
-                    for(int i = 0; i < result.size(); i++){
-                        Details d = result.get(i);
-
-                        //Checks if the amount is negative. If amount is negative then it is a payment
-                        if (d.getAmount() < 0){
-                            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-                        }
-                    }
                     break;
 
                 case "r":
@@ -230,72 +207,16 @@ public class AccountingLedger {
         System.out.println("--Back to the Home Screen--");
     }
 
-    private static void DisplayReportsScreen(ArrayList<Details> result, Scanner scanner){
-        boolean running = true;
+    private static void DisplayReportsScreen(ArrayList<Details> result, Scanner scanner) {
 
-        int command;
-//
-//        LocalDate today = LocalDateTime.now();
-//        LocalDate StartOfMonth = today.withDayOfMonth(1);
+    }
 
+    private static void searchByPreviousYear() {
 
-        for (int i = 0; i < result.size(); i++){
-            Details d = result.get(i);
-            String date = d.getDate();
+    }
 
-            String[] parts = date.split(Pattern.quote("-"));
-            String year = parts[0];
-            String month = parts[1];
-            String day = parts[2];
+    private static void searchByVendor() {
 
-            
-        }
-
-        while (running){
-
-            System.out.println("--Reports Screen--");
-            System.out.println("Month to Date(Press 1): ");
-            System.out.println("Previous Month(Press 2): ");
-            System.out.println("Year to Date(Press 3): ");
-            System.out.println("Previous Year(Press 4): ");
-            System.out.println("Search by vendor(Press 5): ");
-            System.out.println("Go back to Ledger Screen(Press 0): ");
-            command = scanner.nextInt();
-
-            switch(command){
-                case 1:
-                    System.out.println("Month to Date");
-                    for (int i = 0; i < result.size(); i++){
-                        Details d = result.get(i);
-//                        if(StartOfMonth.getMonthValue() == d.getDate()) {
-//                            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-//                        }
-
-                    }
-
-
-                    break;
-                case 2:
-                    System.out.println("Previous Month");
-                    break;
-                case 3:
-                    System.out.println("Year to Date");
-                    break;
-                case 4:
-                    System.out.println("Previous Year");
-                    break;
-                case 5:
-                    System.out.println("Search by vendor");
-                    break;
-                case 0:
-                    running = false;
-                    break;
-                default:
-                    //Keeps my program from crashing
-                    System.out.println("Invalid Entry!");
-            }
-
-        }
     }
 
     private static void WritesDataToFile(String input){
@@ -313,6 +234,39 @@ public class AccountingLedger {
         //Checks if my array is empty
         if (result.isEmpty()){
             System.out.println("No transactions file is found.");
+        }
+    }
+
+    private static void AllTransactions(ArrayList<Details> result){
+        System.out.println("All Transaction");
+        //Display every entry from the transaction.csv file
+        for(int i = 0; i < result.size(); i++) {
+            Details d = result.get(i);
+            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+        }
+    }
+
+    private static void ShowDeposits(ArrayList<Details> result){
+        System.out.println("Deposit");
+        for(int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+
+            //checks if the amount is positive. If it is positive then the amount is a deposit
+            if (d.getAmount() > 0){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+        }
+    }
+
+    private static void ShowPayments(ArrayList<Details> result){
+        System.out.println("Payments");
+        for(int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+
+            //Checks if the amount is negative. If amount is negative then it is a payment
+            if (d.getAmount() < 0){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
         }
     }
 
