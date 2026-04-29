@@ -27,6 +27,7 @@ public class Details {
         this.amount = Double.parseDouble(parts[4]);
     }
 
+
     public String getDate() {
         return date;
     }

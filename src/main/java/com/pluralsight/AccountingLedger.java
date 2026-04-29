@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 
 public class AccountingLedger {
@@ -33,7 +34,6 @@ public class AccountingLedger {
                     case "p":
                         String payment = FormatMakingPayment(scanner);
                         transactionFileWriter(payment);
-
                         break;
 
                     case "l":
@@ -42,6 +42,13 @@ public class AccountingLedger {
                         break;
 
                     case "x":
+                        //Quits program
+                        break;
+
+                    default:
+                        //Keeps my program from crashing incase a number or out of bounds letter
+                        System.out.println("Invalid Entry!");
+                        break;
                 }
 
 
@@ -199,6 +206,9 @@ public class AccountingLedger {
                     System.out.println();
                     DisplayReportsScreen(result, scanner);
                     break;
+
+                default:
+                    System.out.println("Invalid Entry!");
             }
 
         }while(!command.equalsIgnoreCase("h"));
@@ -209,6 +219,22 @@ public class AccountingLedger {
         boolean running = true;
 
         int command;
+//
+//        LocalDate today = LocalDateTime.now();
+//        LocalDate StartOfMonth = today.withDayOfMonth(1);
+
+
+        for (int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+            String date = d.getDate();
+
+            String[] parts = date.split(Pattern.quote("-"));
+            String year = parts[0];
+            String month = parts[1];
+            String day = parts[2];
+
+            
+        }
 
         while (running){
 
@@ -224,6 +250,15 @@ public class AccountingLedger {
             switch(command){
                 case 1:
                     System.out.println("Month to Date");
+                    for (int i = 0; i < result.size(); i++){
+                        Details d = result.get(i);
+//                        if(StartOfMonth.getMonthValue() == d.getDate()) {
+//                            System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+//                        }
+
+                    }
+
+
                     break;
                 case 2:
                     System.out.println("Previous Month");
@@ -240,6 +275,9 @@ public class AccountingLedger {
                 case 0:
                     running = false;
                     break;
+                default:
+                    //Keeps my program from crashing
+                    System.out.println("Invalid Entry!");
             }
 
         }
@@ -255,5 +293,6 @@ public class AccountingLedger {
             System.out.println(e.getMessage());
         }
     }
+
 
 }
