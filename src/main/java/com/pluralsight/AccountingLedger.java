@@ -27,13 +27,13 @@ public class AccountingLedger {
 
                 switch (command.toLowerCase()){
                     case "d":
-                        String deposit = FormatTheDeposit(scanner);
-                        transactionFileWriter(deposit);
+                        String deposit = CollectsTheDepositDATA(scanner);
+                        WritesDataToFile(deposit);
                         break;
 
                     case "p":
-                        String payment = FormatMakingPayment(scanner);
-                        transactionFileWriter(payment);
+                        String payment = CollectsMakingPaymentDATA(scanner);
+                        WritesDataToFile(payment);
                         break;
 
                     case "l":
@@ -78,13 +78,18 @@ public class AccountingLedger {
             //Reversing the way my code displays
             Collections.reverse(result);
 
+            //Checks if my array is empty
+            if (result.isEmpty()){
+                System.out.println("No transactions file is found.");
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return result;
     }
 
-    private static String FormatTheDeposit(Scanner scanner) {
+    private static String CollectsTheDepositDATA(Scanner scanner) {
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
@@ -120,7 +125,7 @@ public class AccountingLedger {
 
     }
 
-    private static String FormatMakingPayment(Scanner scanner){
+    private static String CollectsMakingPaymentDATA(Scanner scanner){
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
         String FormatedTime = today.format(hours);
@@ -170,16 +175,18 @@ public class AccountingLedger {
 
             switch(command.toLowerCase()){
                 case "a":
+                    ChecksIfTransactionsIsEmpty(result);
                     //Display every entry from the transaction.csv file
                     for(int i = 0; i < result.size(); i++) {
                         Details d = result.get(i);
                         System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
                     }
-                    //System.out.println("all transactions");
                     break;
 
                 case "d":
                     System.out.println("deposit");
+                    ChecksIfTransactionsIsEmpty(result);
+
                     for(int i = 0; i < result.size(); i++){
                         Details d = result.get(i);
 
@@ -191,6 +198,7 @@ public class AccountingLedger {
                     break;
 
                 case "p":
+                    ChecksIfTransactionsIsEmpty(result);
                     System.out.println("payments");
                     for(int i = 0; i < result.size(); i++){
                         Details d = result.get(i);
@@ -283,7 +291,7 @@ public class AccountingLedger {
         }
     }
 
-    private static void transactionFileWriter(String input){
+    private static void WritesDataToFile(String input){
         try{
             FileWriter writer = new FileWriter("transactions.csv", true);
             writer.write(input);
@@ -291,6 +299,13 @@ public class AccountingLedger {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void ChecksIfTransactionsIsEmpty(ArrayList<Details> result){
+        //Checks if my array is empty
+        if (result.isEmpty()){
+            System.out.println("No transactions file is found.");
         }
     }
 
