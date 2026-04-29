@@ -176,6 +176,8 @@ public class AccountingLedger {
             switch(command.toLowerCase()){
                 case "a":
                     ChecksIfTransactionsIsEmpty(result);
+
+                    System.out.println("All Transaction");
                     //Display every entry from the transaction.csv file
                     for(int i = 0; i < result.size(); i++) {
                         Details d = result.get(i);
@@ -184,9 +186,9 @@ public class AccountingLedger {
                     break;
 
                 case "d":
-                    System.out.println("deposit");
                     ChecksIfTransactionsIsEmpty(result);
 
+                    System.out.println("Deposit");
                     for(int i = 0; i < result.size(); i++){
                         Details d = result.get(i);
 
@@ -199,7 +201,8 @@ public class AccountingLedger {
 
                 case "p":
                     ChecksIfTransactionsIsEmpty(result);
-                    System.out.println("payments");
+
+                    System.out.println("Payments");
                     for(int i = 0; i < result.size(); i++){
                         Details d = result.get(i);
 
@@ -213,6 +216,10 @@ public class AccountingLedger {
                 case "r":
                     System.out.println();
                     DisplayReportsScreen(result, scanner);
+                    break;
+
+                case "h":
+                    //Goes back to the home screen
                     break;
 
                 default:
