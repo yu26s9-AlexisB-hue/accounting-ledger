@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -219,7 +220,7 @@ public class AccountingLedger {
 
             switch (command.toLowerCase()){
                 case "1":
-                    searchByMonthToDate();
+                    searchByMonthToDate(result);
                     break;
 
                 case "2":
@@ -247,8 +248,19 @@ public class AccountingLedger {
 
     }
 
-    private static void searchByMonthToDate(){
+    private static void searchByMonthToDate(ArrayList<Details> result){
         System.out.println("Month To Date");
+        LocalDate today = LocalDate.now();
+        LocalDate firstOfMonth = today.withDayOfMonth(30);
+
+        for(int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+            LocalDate date = d.getDate();
+
+            if (date.isBefore(firstOfMonth) && date.isAfter(today)){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+        }
     }
 
     private static void searchByPreviousMonth(){
