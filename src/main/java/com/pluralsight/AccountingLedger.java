@@ -163,8 +163,6 @@ public class AccountingLedger {
     private static void DisplayLedgerScreen(ArrayList<Details> result, Scanner scanner){
         String command;
         do{
-
-
             System.out.println("--Ledger Screen --");
             System.out.println("Display all entries(Press A): ");
             System.out.println("Display only deposit entries(Press D): ");
@@ -208,15 +206,76 @@ public class AccountingLedger {
     }
 
     private static void DisplayReportsScreen(ArrayList<Details> result, Scanner scanner) {
+        String command;
+        do{
+            System.out.println("--Reports Screen--");
+            System.out.println("Month to Date(Press 1): ");
+            System.out.println("Previous Month(Press 2): ");
+            System.out.println("Year to Date(Press 3): ");
+            System.out.println("Previous Year(Press 4): ");
+            System.out.println("Search by vendor(Press 5): ");
+            System.out.println("Go Back to Ledger(Press 0): ");
+            command = scanner.nextLine();
 
+            switch (command.toLowerCase()){
+                case "1":
+                    searchByMonthToDate();
+                    break;
+
+                case "2":
+                    searchByPreviousMonth();
+                    break;
+
+                case "3":
+                    searchByYearToDate();
+                    break;
+
+                case "4":
+                    searchByPreviousYear();
+                    break;
+
+                case "5":
+                    searchByVendor(result, scanner);
+                    break;
+
+                case "0":
+                    //Back to ledger
+            }
+
+        }while(!command.equalsIgnoreCase("0"));
+        System.out.println("--Back To Ledger--");
+
+    }
+
+    private static void searchByMonthToDate(){
+        System.out.println("Month To Date");
+    }
+
+    private static void searchByPreviousMonth(){
+        System.out.println("Previous Month");
+    }
+
+    private static void searchByYearToDate(){
+        System.out.println("Year to Date");
     }
 
     private static void searchByPreviousYear() {
-
+        System.out.println("Previous Year");
     }
 
-    private static void searchByVendor() {
+    private static void searchByVendor(ArrayList<Details> result, Scanner scanner) {
+        System.out.println("Enter the name of the Vendor: ");
+        String v = scanner.nextLine();
 
+        for (int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+            String match = d.getVendor();
+            if(v.equalsIgnoreCase(match)){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+
+        }
+        System.out.println("Search by Vendor");
     }
 
     private static void WritesDataToFile(String input){
