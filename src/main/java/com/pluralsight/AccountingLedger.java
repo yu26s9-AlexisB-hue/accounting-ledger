@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 
 public class AccountingLedger {
@@ -228,7 +227,7 @@ public class AccountingLedger {
                     break;
 
                 case "3":
-                    searchByYearToDate();
+                    searchByYearToDate(result);
                     break;
 
                 case "4":
@@ -291,22 +290,21 @@ public class AccountingLedger {
     private static void searchByYearToDate(ArrayList<Details> result){
         System.out.println("Year to Date");
         LocalDate today = LocalDate.now();
-        LocalDate year = today.withDayOfYear(1);
+        LocalDate StartOfYear = today.withDayOfYear(1);
 
         for(int i = 0; i < result.size(); i++){
             Details d = result.get(i);
             LocalDate date = d.getDate();
 
-            if(!date.isBefore(year) && !date.isAfter(today)){
+            if(!date.isBefore(StartOfYear) && !date.isAfter(today)) {
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-            }else{
-                System.out.println("No transactions for this month.");
             }
         }
     }
 
     private static void searchByPreviousYear() {
         System.out.println("Previous Year");
+        
     }
 
     private static void searchByVendor(ArrayList<Details> result, Scanner scanner) {
