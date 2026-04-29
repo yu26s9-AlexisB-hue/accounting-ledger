@@ -241,6 +241,9 @@ public class AccountingLedger {
 
                 case "0":
                     //Back to ledger
+                    break;
+                default:
+                    System.out.println("Invalid Entry");
             }
 
         }while(!command.equalsIgnoreCase("0"));
@@ -268,21 +271,38 @@ public class AccountingLedger {
     private static void searchByPreviousMonth(ArrayList<Details> result){
         System.out.println("Previous Month");
         LocalDate today = LocalDate.now();
-        LocalDate currentMonth = today.withDayOfMonth(1);
+        LocalDate firstOfMonth = today.withDayOfMonth(1);
+        LocalDate lastOfMonth = firstOfMonth.minusDays(1);
+        LocalDate firstDayLastMonth = lastOfMonth.withDayOfMonth(1);
 
         for(int i = 0; i < result.size(); i++){
             Details d = result.get(i);
             LocalDate date = d.getDate();
 
-            if (date.isBefore(currentMonth)){
+            if (!date.isBefore(firstDayLastMonth) && !date.isAfter(lastOfMonth)){
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }else{
+                System.out.println("Invalid Entry");
             }
 
         }
     }
 
-    private static void searchByYearToDate(){
+    private static void searchByYearToDate(ArrayList<Details> result){
         System.out.println("Year to Date");
+        LocalDate today = LocalDate.now();
+        LocalDate year = today.withDayOfYear(1);
+
+        for(int i = 0; i < result.size(); i++){
+            Details d = result.get(i);
+            LocalDate date = d.getDate();
+
+            if(!date.isBefore(year) && !date.isAfter(today)){
+                System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }else{
+                System.out.println("No transactions for this month.");
+            }
+        }
     }
 
     private static void searchByPreviousYear() {
