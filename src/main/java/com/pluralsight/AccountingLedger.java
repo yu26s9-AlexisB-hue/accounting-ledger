@@ -251,8 +251,7 @@ public class AccountingLedger {
         LocalDate today = LocalDate.now();
         LocalDate firstOfMonth = today.withDayOfMonth(1);
 
-        for(int i = 0; i < result.size(); i++){
-            Details d = result.get(i);
+        for(Details d : result){
             LocalDate date = d.getDate();
 
             if (!date.isBefore(firstOfMonth) && !date.isAfter(today)){
@@ -300,8 +299,7 @@ public class AccountingLedger {
         LocalDate lastYear = currentYear.minusMonths(1);
         LocalDate firstDayLastYear = lastYear.withDayOfYear(1);
 
-        for(int i = 0; i < result.size(); i++){
-            Details d = result.get(i);
+        for(Details d : result){
             LocalDate date = d.getDate();
 
             if (!date.isBefore(firstDayLastYear) && !date.isAfter(lastYear)){
@@ -316,9 +314,9 @@ public class AccountingLedger {
         System.out.println("Enter the name of the Vendor: ");
         String v = scanner.nextLine();
 
-        for (int i = 0; i < result.size(); i++){
-            Details d = result.get(i);
+        for (Details d : result){
             String match = d.getVendor();
+
             if(v.equalsIgnoreCase(match)){
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
@@ -341,7 +339,7 @@ public class AccountingLedger {
     private static void ChecksIfTransactionsIsEmpty(ArrayList<Details> result){
         //Checks if my array is empty
         if (result.isEmpty()){
-            System.out.println("No transactions file is found.");
+            System.out.println("No transaction Data is Available at this time");
         }
     }
 
