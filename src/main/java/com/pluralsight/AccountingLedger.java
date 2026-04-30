@@ -18,6 +18,7 @@ public class AccountingLedger {
             Scanner scanner = new Scanner(System.in);
             String command;
             do{
+                //Prompts my User
                 System.out.println("--The Store Home Screen--");
                 System.out.println("Add a deposit( Press D): ");
                 System.out.println("Make a payment(Press P): ");
@@ -77,11 +78,6 @@ public class AccountingLedger {
             reader.close();
             //Reversing the way my code displays
             Collections.reverse(result);
-
-            //Checks if my array is empty
-            if (result.isEmpty()){
-                System.out.println("No transactions file is found.");
-            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -261,8 +257,6 @@ public class AccountingLedger {
 
             if (!date.isBefore(firstOfMonth) && !date.isAfter(today)){
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-            }else{
-                System.out.println("No transactions for this month.");
             }
         }
     }
@@ -270,18 +264,15 @@ public class AccountingLedger {
     private static void searchByPreviousMonth(ArrayList<Details> result){
         System.out.println("Previous Month");
         LocalDate today = LocalDate.now();
-        LocalDate firstOfMonth = today.withDayOfMonth(1);
-        LocalDate lastOfMonth = firstOfMonth.minusDays(1);
-        LocalDate firstDayLastMonth = lastOfMonth.withDayOfMonth(1);
+        LocalDate startOfCurrentMonth = today.withDayOfMonth(1);
+        LocalDate endOfLastMonth = startOfCurrentMonth.minusDays(1);
+        LocalDate startOfLastMonth = endOfLastMonth.withDayOfMonth(1);
 
-        for(int i = 0; i < result.size(); i++){
-            Details d = result.get(i);
+        for(Details d : result){
             LocalDate date = d.getDate();
 
-            if (!date.isBefore(firstDayLastMonth) && !date.isAfter(lastOfMonth)){
+            if (!date.isBefore(startOfLastMonth) && !date.isAfter(endOfLastMonth)){
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
-            }else{
-                System.out.println("Invalid Entry");
             }
 
         }
@@ -292,8 +283,8 @@ public class AccountingLedger {
         LocalDate today = LocalDate.now();
         LocalDate StartOfYear = today.withDayOfYear(1);
 
-        for(int i = 0; i < result.size(); i++){
-            Details d = result.get(i);
+        //Changing my for loops to the enhanced 'for' as intellij suggested.
+        for(Details d : result){
             LocalDate date = d.getDate();
 
             if(!date.isBefore(StartOfYear) && !date.isAfter(today)) {
