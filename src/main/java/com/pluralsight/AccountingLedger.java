@@ -251,11 +251,19 @@ public class AccountingLedger {
         LocalDate today = LocalDate.now();
         LocalDate firstOfMonth = today.withDayOfMonth(1);
 
+        boolean found = false;
+
         for(Details d : result){
             LocalDate date = d.getDate();
 
             if (!date.isBefore(firstOfMonth) && !date.isAfter(today)){
+
+                found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+
+            }if (!found) {
+                System.out.println("No transactions found for this period.");
+                break;
             }
         }
     }
@@ -267,11 +275,19 @@ public class AccountingLedger {
         LocalDate endOfLastMonth = startOfCurrentMonth.minusDays(1);
         LocalDate startOfLastMonth = endOfLastMonth.withDayOfMonth(1);
 
+        boolean found = false;
+
         for(Details d : result){
             LocalDate date = d.getDate();
 
             if (!date.isBefore(startOfLastMonth) && !date.isAfter(endOfLastMonth)){
+                found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+
+            if(!found){
+                System.out.println("No transactions found for this period.");
+                break;
             }
 
         }
@@ -282,12 +298,20 @@ public class AccountingLedger {
         LocalDate today = LocalDate.now();
         LocalDate StartOfYear = today.withDayOfYear(1);
 
+        boolean found = false;
+
         //Changing my for loops to the enhanced 'for' as intellij suggested.
         for(Details d : result){
             LocalDate date = d.getDate();
 
             if(!date.isBefore(StartOfYear) && !date.isAfter(today)) {
+                found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+
+            if(!found){
+                System.out.println("No transactions found for this period.");
+                break;
             }
         }
     }
@@ -299,11 +323,19 @@ public class AccountingLedger {
         LocalDate lastYear = currentYear.minusMonths(1);
         LocalDate firstDayLastYear = lastYear.withDayOfYear(1);
 
+        boolean found = false;
+
         for(Details d : result){
             LocalDate date = d.getDate();
 
             if (!date.isBefore(firstDayLastYear) && !date.isAfter(lastYear)){
+                found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
+            }
+
+            if(!found){
+                System.out.println("No transactions found for this period.");
+                break;
             }
         }
 
@@ -314,15 +346,21 @@ public class AccountingLedger {
         System.out.println("Enter the name of the Vendor: ");
         String v = scanner.nextLine();
 
+        boolean found = false;
+
         for (Details d : result){
             String match = d.getVendor();
 
             if(v.equalsIgnoreCase(match)){
+                found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
 
+            if (!found) {
+                System.out.println("No transactions found for that vendor.");
+                break;
+            }
         }
-        System.out.println("Search by Vendor");
     }
 
     private static void WritesDataToFile(String input){
