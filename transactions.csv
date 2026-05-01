@@ -4,10 +4,6 @@
 2025-11-08|08:15:42|Invoice 1000 paid|Alpha Corp|1800.0
 2025-11-09|14:22:10|Coffee Supplies|Costco|-45.25
 2025-11-10|16:05:33|Software Subscription|Adobe|-29.99
-2025-11-12|10:44:50|Making a Deposit|Linda Brown|3000.0
-2025-11-14|13:18:27|Office Chairs|IKEA|-600.0
-2025-11-18|09:55:12|Invoice 1001 paid|Beta LLC|2200.0
-2025-11-20|07:35:41|Electricity Bill|Duke Energy|-180.45
 2025-11-22|15:11:05|Internet Bill|Spectrum|-79.99
 2025-11-25|11:26:37|Printer Ink|Best Buy|-95.0
 2025-11-28|17:45:09|Team Lunch|Chipotle|-72.4
@@ -15,8 +11,6 @@
 2025-12-03|10:55:21|Invoice 1002 paid|Omega Ltd|2750.0
 2025-12-05|14:08:49|Gasoline|Shell Gas station|-320.0
 2025-12-07|12:32:11|Office Supplies|Staples|-65.89
-2025-12-10|09:41:33|Desk Lamp|Walmart|-22.99
-2025-12-12|16:22:07|Invoice 1003 paid|Nova Systems|1980.0
 2025-12-15|11:50:42|Software Subscription|Adobe|-29.99
 2025-12-18|13:33:29|Coffee Supplies|Costco|-58.3
 2025-12-21|15:17:10|Making a Deposit|Linda Brown|4200.0
@@ -54,13 +48,6 @@
 2026-03-20|08:17:43|Software Subscription|Adobe|-29.99
 2026-03-23|12:55:01|Team Lunch|Chipotle|-88.7
 2026-03-26|14:33:19|Making a Deposit|Alexis Barrett|24000.0
-2026-03-29|18:05:44|Office Equipment|Best Buy|-920.0
-2026-04-01|09:11:52|Invoice 1009 paid|Omega Ltd|3000.0
-2026-04-03|11:45:18|Office Supplies|Staples|-85.6
-2026-04-06|14:22:49|Gasoline|Shell Gas station|-720.0
-2026-04-20|12:41:58|Internet Bill|Spectrum|-79.99
-2026-04-23|14:18:22|Team Lunch|Chipotle|-97.3
-2026-04-26|17:05:36|Invoice 1010 paid|Titan Industries|3400.0
 2026-04-27|05:31:08|Invoice 1002 paid|Alpha Corp|2200.0
 2026-04-27|05:31:51|Ergonomic Keyboard|Amazon|-89.5
 2026-04-27|05:32:34|Office Supplies|Staples|-45.75
@@ -76,11 +63,6 @@
 2026-04-28|02:53:31|Electricity Bill|Duke Energy|-210.75
 2026-04-28|03:42:47|Secret Operations|CIA|5.0E10
 2026-04-28|03:49:41|Parking Ticket|Charlotte police Department|-257.29
-2026-04-28|04:25:29|Invoice 387 Paid|Amazon|490.02
-2026-04-28|04:26:30|Renting Skates|Kates Skating Ring |-17.95
-2026-04-28|08:13:47|Internet Bill|Spectrum|-79.99
-2026-04-28|08:15:56|Invoice 1011 paid |Horizon LLC|1250.0
-2026-04-28|08:19:05|Invoice 1012 paid|Titan Industries |3000.0
 2026-04-28|08:20:10|Desk Lamp|Walmart|-25.99
 2026-04-28|08:21:17|Team Lunch|Chipotle|-85.6
 2026-04-28|08:22:41|Office Chairs|IKEA|-350.0
@@ -88,5 +70,3 @@
 2026-04-29|12:44:51|Deep tissue Massage|Woodhouse Spa|-64.97
 2026-04-29|04:05:48|Invoice 283 Paid|Zelle|30849.0
 2026-04-29|04:07:59|Washed Pink Jordan 1 High|Foot Locker|-181.39
-2026-04-30|10:34:47|Invoice 212 Paid|Western Union|3200.0
-2026-04-30|10:37:22|Air Pods|Walmart|-24.79
