@@ -272,10 +272,11 @@ public class AccountingLedger {
                 found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
 
-            }if (!found) {
-                System.out.println("No transactions found for this period.");
-                break;
             }
+//            if (!found) {
+//                System.out.println("No transactions found for this period.");
+//                break;
+//            }
         }
     }
 
@@ -296,10 +297,10 @@ public class AccountingLedger {
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
 
-            if(!found){
-                System.out.println("No transactions found for this period.");
-                break;
-            }
+//            if(!found){
+//                System.out.println("No transactions found for this period.");
+//                break;
+//            }
 
         }
     }
@@ -320,10 +321,10 @@ public class AccountingLedger {
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
 
-            if(!found){
-                System.out.println("No transactions found for this period.");
-                break;
-            }
+//            if(!found){
+//                System.out.println("No transactions found for this period.");
+//                break;
+//            }
         }
     }
 
@@ -344,10 +345,10 @@ public class AccountingLedger {
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
 
-            if(!found){
-                System.out.println("No transactions found for this period.");
-                break;
-            }
+//            if(!found){
+//                System.out.println("No transactions found for this period.");
+//                break;
+//            }
         }
 
 
@@ -366,7 +367,7 @@ public class AccountingLedger {
                 found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
-            
+
         }
     }
 
