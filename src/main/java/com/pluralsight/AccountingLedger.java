@@ -85,6 +85,17 @@ public class AccountingLedger {
         return result;
     }
 
+    private static void WritesDataToFile(String input){
+        try{
+            FileWriter writer = new FileWriter("transactions.csv", true);
+            writer.write(input);
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private static String CollectsTheDepositDATA(Scanner scanner) {
         LocalDateTime today = LocalDateTime.now();
         DateTimeFormatter hours = DateTimeFormatter.ofPattern("yyyy-MM-dd|hh:mm:ss");
@@ -355,22 +366,7 @@ public class AccountingLedger {
                 found = true;
                 System.out.printf("%s %s %s %s %.2f\n", d.getDate(), d.getTime(), d.getDescription(), d.getVendor(), d.getAmount());
             }
-
-            if (!found) {
-                System.out.println("No transactions found for that vendor.");
-                break;
-            }
-        }
-    }
-
-    private static void WritesDataToFile(String input){
-        try{
-            FileWriter writer = new FileWriter("transactions.csv", true);
-            writer.write(input);
-            writer.close();
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            
         }
     }
 
